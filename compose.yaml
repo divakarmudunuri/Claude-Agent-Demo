@@ -1,0 +1,17 @@
+services:
+  pgvector:
+    image: 'pgvector/pgvector:pg17'
+    labels:
+      # Tells Spring Boot Docker Compose to treat this image as PostgreSQL.
+      - 'org.springframework.boot.service-connection=postgres'
+    environment:
+      - 'POSTGRES_DB=ragdb'
+      - 'POSTGRES_USER=rag'
+      - 'POSTGRES_PASSWORD=rag'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+
+volumes:
+  pgdata:

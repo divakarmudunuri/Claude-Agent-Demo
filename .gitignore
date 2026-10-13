@@ -1,0 +1,83 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Gradle ###
+.kotlin/
+.gradletasknamecache
+
+### Java ###
+*.class
+*.log
+hs_err_pid*
+replay_pid*
+
+### Logs ###
+logs/
+*.log.gz
+
+### OS ###
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+### Editors ###
+*.swp
+*.swo
+*~
+
+### Secrets / local config ###
+# AWS credentials come from the default chain; never commit keys or local overrides.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+application-local.properties
+application-local.yml
+src/main/resources/application-*.local.properties
+
+### Docker ###
+compose.override.yaml
+docker-compose.override.yml
+
+### Claude Code (personal settings) ###
+.claude/settings.local.json
