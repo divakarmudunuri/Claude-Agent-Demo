@@ -8,14 +8,13 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.ExtractedTextFormatter;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.pdf.config.PdfDocumentReaderConfig;
-import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 /**
- * Reads a PDF page by page, splits it into token-sized chunks, embeds each chunk with
+ * Reads a PDF page by page, splits it into overlapping token-sized chunks, embeds each chunk with
  * Titan Text Embeddings V2 and stores it in pgvector.
  */
 @Service
@@ -25,16 +24,13 @@ public class PdfIngestionService {
 
 	private final VectorStore vectorStore;
 
-	private final TokenTextSplitter splitter;
+	private final OverlappingTokenTextSplitter splitter;
 
 	public PdfIngestionService(VectorStore vectorStore,
-			@Value("${app.ingestion.chunk-size-tokens}") int chunkSizeTokens) {
+			@Value("${app.ingestion.chunk-size-tokens}") int chunkSizeTokens,
+			@Value("${app.ingestion.chunk-overlap-tokens}") int chunkOverlapTokens) {
 		this.vectorStore = vectorStore;
-		this.splitter = TokenTextSplitter.builder()
-				.withChunkSize(chunkSizeTokens)
-				.withMinChunkSizeChars(200)
-				.withKeepSeparator(true)
-				.build();
+		this.splitter = new OverlappingTokenTextSplitter(chunkSizeTokens, chunkOverlapTokens, 200);
 	}
 
 	public IngestionResult ingest(Resource pdf, String sourceName) {

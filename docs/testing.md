@@ -9,7 +9,7 @@ account guide with specific fees and rules, so you can check the answers against
 ## 1. Check AWS access
 
 1. Your AWS account needs a valid payment method (Billing and Cost Management → Payment preferences).
-2. The Anthropic use-case form must be submitted. See the Bedrock setup guide.
+2. The Anthropic use-case form must be submitted. See [bedrock-setup.md](bedrock-setup.md).
 3. In the Bedrock console playground, Claude Haiku 4.5 should answer `hi`. If it doesn't, the app won't work either.
 
 Confirm your terminal uses the right account and region:

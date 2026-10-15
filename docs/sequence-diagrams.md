@@ -27,7 +27,7 @@ sequenceDiagram
         IS->>R: get()
         R-->>IS: one Document per page (page_number metadata)
         IS->>S: apply(pages)
-        S-->>IS: chunks (~800 tokens each)
+        S-->>IS: chunks (~800 tokens each, 120-token overlap)
         IS->>IS: add metadata source = "guide.pdf"
         IS->>VS: delete("source == 'guide.pdf'")
         VS->>DB: DELETE existing chunks for this file
@@ -157,6 +157,6 @@ sequenceDiagram
 | Upload | File name does not end in `.pdf` | 400 `Only PDF files are supported` |
 | Chat | `question` missing or blank | 400 `question is required` |
 | `search_documents` | Unknown tool name, or the search throws | `tool_result` with `is_error: true`; Claude can retry or answer without it |
-| Claude call | Bedrock 403 "not available for this account" / 404 "use case details have not been submitted" | 500 (exception propagates); see the troubleshooting section of the Bedrock setup guide |
+| Claude call | Bedrock 403 "not available for this account" / 404 "use case details have not been submitted" | 500 (exception propagates); see the troubleshooting section of [bedrock-setup.md](bedrock-setup.md#troubleshooting) |
 | Claude call | Throttling / 5xx | SDK retries twice, then 500 |
 | Claude response | `stop_reason: refusal` | 200 with "I can't help with that request." |
